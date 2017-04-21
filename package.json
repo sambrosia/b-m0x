@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "ld38",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/game.js",
+  "scripts": {
+    "start": "webpack-dev-server --host 0.0.0.0",
+    "build": "webpack --progress --colors",
+    "build:watch": "webpack --progress --colors --watch"
+  },
+  "devDependencies": {
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.2"
+  }
+}

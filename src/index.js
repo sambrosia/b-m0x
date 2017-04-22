@@ -28,6 +28,7 @@ app.loader
 .add('bg', 'assets/bg.png')
 .add('panel', 'assets/panel.png')
 .add('panel-glow', 'assets/panel-glow.png')
+.add('energy', 'assets/energy.png')
 
 .add('bmoxGlow', 'assets/bmoxGlow.png')
 .add('bmoxRing', 'assets/bmoxRing.png')
@@ -74,9 +75,7 @@ const BmoxFaces = {
     bmox.bobber.strength.set(2, 12)
     bmox.bobber.speed.set(200, 800)
   },
-  bmoxBlink (bmox) {
-
-  },
+  bmoxBlink (bmox) {},
   bmoxAngry (bmox) {
     bmox.face.texture = res.bmoxAngry.texture
     bmox.bobber.strength.set(12, 24)
@@ -124,15 +123,7 @@ function mainScene (app) {
   app.stage.fg = app.stage.addChild(new PIXI.Container())
 
   const bg = new PIXI.Sprite(res.bg.texture)
-
-  const panel = new fae.Entity(app, new c.Transform(), new PIXI.Sprite(res.panel.texture), new Bobber())
-  panel.glow = panel.sprite.addChild(new PIXI.Sprite(res['panel-glow'].texture))
-  panel.bobber.position.y = 4
-  panel.bobber.strength.set(0, 4)
-  panel.bobber.speed.set(1, 1000)
-
   app.stage.bg.addChild(bg)
-  app.stage.fg.addChild(panel.sprite)
 
   for (let i = 0; i < app.renderer.width * 0.15; i++) {
     let n = 1
@@ -172,16 +163,26 @@ function mainScene (app) {
     })
   }
 
+  const panel = new fae.Entity(app, new c.Transform(), new PIXI.Sprite(res.panel.texture), new Bobber())
+  app.stage.fg.addChild(panel.sprite)
+  panel.glow = panel.sprite.addChild(new PIXI.Sprite(res['panel-glow'].texture))
+  panel.bobber.position.y = 4
+  panel.bobber.strength.set(0, 4)
+  panel.bobber.speed.set(1, 600)
+
+  const energyText = new fae.Entity(app, new c.Transform(), new PIXI.Sprite(res.energy.texture), new Bobber())
+  app.stage.fg.addChild(energyText.sprite)
+  energyText.bobber.position.set(20, 840)
+  energyText.bobber.strength.set(0, 4)
+  energyText.bobber.speed.set(1, 600)
+
   const bmox = new fae.Entity(app, new c.Transform(), new PIXI.Container(), new Bobber())
   app.stage.fg.addChild(bmox.container)
-
   bmox.transform.position.set(1400, 0)
   bmox.bobber.position = new fae.utils.Vec2(bmox.transform.position)
-
   bmox.glow = bmox.container.addChild(new PIXI.Sprite(res.bmoxGlow.texture))
   bmox.ring = bmox.container.addChild(new PIXI.Sprite(res.bmoxRing.texture))
   bmox.face = bmox.container.addChild(new PIXI.Sprite(res.bmoxHappy.texture))
-
   app.event.emit('bmoxHappy', bmox)
 }
 

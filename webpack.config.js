@@ -2,7 +2,7 @@ module.exports = {
   devtool: 'source-map',
   entry: './src/index.js',
   output: {
-    filename: 'dist/game.js'
+    filename: 'index.js'
   },
   resolve: {
     alias: {

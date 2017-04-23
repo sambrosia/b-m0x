@@ -57,6 +57,7 @@ app.loader
 .add('glow3', 'assets/glow3.png')
 .add('glow4', 'assets/glow4.png')
 
+.add('music', 'assets/music.mp3')
 .add('soundScanned', 'assets/scanned.wav')
 .add('soundCandidate', 'assets/candidate.wav')
 .add('soundKnown', 'assets/known.wav')
@@ -65,8 +66,13 @@ app.loader
 .add('soundOff', 'assets/off.wav')
 
 .load((loader, resources) => {
-  PIXI.sound.volumeAll = 0.15
+  PIXI.sound.volumeAll = 0.05
   resources.soundScanned.sound.volume = 0.6
-  resources.soundReceived.sound.volume = 6
+  resources.soundReceived.sound.volume = 4
+
+  resources.music.sound.loop = true
+  resources.music.sound.volume = 15
+  resources.music.sound.play()
+
   app.enter(mainScene)
 })

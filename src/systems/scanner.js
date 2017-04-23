@@ -14,9 +14,12 @@ const scanner = {
     star.scanned.indicator = star.animatedSprite.addChild(new PIXI.Sprite(app.res.scannedIndicator.texture))
     star.scanned.indicator.anchor.set(0.5)
 
-    console.log('Energy: ' + app.globals.energy + '%')
-    console.log('Distance: ' + Math.round(star.scanned.distance * 10) / 10 + 'LY')
-    console.log('Planets: ' + star.scanned.planets)
+    app.globals.currentStar = star
+    app.globals.starInfo.number.text = app.globals.starsScanned
+    app.globals.starInfo.distance.text = Math.round(star.scanned.distance)
+    app.globals.starInfo.planets.text = star.scanned.planets
+
+    app.globals.starsScanned++
 
     app.globals.starsUnderPointer--
     if (app.globals.starsUnderPointer <= 0) app.stage.scanPrompt.visible = false

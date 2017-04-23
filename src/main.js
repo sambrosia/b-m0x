@@ -13,7 +13,9 @@ export default function mainScene (app) {
   app.globals = {
     starsUnderPointer: 0,
     energy: 100,
-    scanCost: 10
+    scanCost: 5,
+    starsScanned: 0,
+    currentStar: null
   }
 
   new fae.System(fae.systems.PIXIAdapter).start(app)
@@ -62,4 +64,18 @@ export default function mainScene (app) {
   scanPrompt.anchor.set(0.5)
   scanPrompt.visible = false
   app.stage.scanPrompt = app.stage.fg.addChild(scanPrompt)
+
+  const starInfo = new PIXI.Sprite(app.res.starInfo.texture)
+  panel.sprite.addChild(starInfo)
+  starInfo.position.set(80, 40)
+  starInfo.number = starInfo.addChild(new PIXI.extras.BitmapText('0', { font: '40px bmoxFont' }))
+  starInfo.number.position.set(200, 4)
+
+  starInfo.distance = starInfo.addChild(new PIXI.extras.BitmapText('0', { font: '40px bmoxFont' }))
+  starInfo.distance.position.set(200, 70)
+
+  starInfo.planets = starInfo.addChild(new PIXI.extras.BitmapText('0', { font: '40px bmoxFont' }))
+  starInfo.planets.position.set(200, 132)
+
+  app.globals.starInfo = starInfo
 }

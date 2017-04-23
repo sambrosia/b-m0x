@@ -29,6 +29,7 @@ app.loader
 .add('panel', 'assets/panel.png')
 .add('panel-glow', 'assets/panel-glow.png')
 .add('noPower', 'assets/noPower.png')
+.add('starInfo', 'assets/starInfo.png')
 .add('scanPrompt', 'assets/scanPrompt.png')
 .add('scannedIndicator', 'assets/scannedIndicator.png')
 .add('replay', 'assets/replay.png')

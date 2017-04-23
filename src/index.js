@@ -30,6 +30,7 @@ app.loader
 .add('panel-glow', 'assets/panel-glow.png')
 .add('noPower', 'assets/noPower.png')
 .add('scanPrompt', 'assets/scanPrompt.png')
+.add('scannedIndicator', 'assets/scannedIndicator.png')
 .add('replay', 'assets/replay.png')
 .add('energy', 'assets/energy.png')
 .add('bmoxFont', 'assets/bmoxFont.xml')

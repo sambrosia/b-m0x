@@ -39,12 +39,12 @@ export default function mainScene (app) {
 
   const energyText = new fae.Entity(app, new c.Transform(), new PIXI.Sprite(app.res.energy.texture), new Bobber())
   app.stage.fg.addChild(energyText.sprite)
-  energyText.bobber.position.set(60, 900)
+  energyText.bobber.position.set(80, 940)
   energyText.bobber.strength.set(0, 4)
   energyText.bobber.speed.set(1, 600)
 
   energyText.counter = energyText.sprite.addChild(new PIXI.extras.BitmapText('100%', { font: '40px bmoxFont' }))
-  energyText.counter.position.set(290, 28)
+  energyText.counter.position.set(210, 12)
   app.globals.energyCounter = energyText.counter
 
   const bmox = new fae.Entity(app, new c.Transform(), new PIXI.Container(), new Bobber())

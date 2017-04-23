@@ -34,8 +34,6 @@ export default function generateStars (app) {
 
     star.animatedSprite.on('pointertap', event => {
       app.event.emit('scanStar', star)
-      app.globals.starsUnderPointer--
-      if (app.globals.starsUnderPointer <= 0) app.stage.scanPrompt.visible = false
     })
 
     star.animatedSprite.on('pointerover', event => {

@@ -11,11 +11,15 @@ const scanner = {
     app.event.emit('changeEnergy', -app.globals.scanCost)
     star.attach(new Scanned())
     star.animatedSprite.interactive = false
+    star.scanned.indicator = star.animatedSprite.addChild(new PIXI.Sprite(app.res.scannedIndicator.texture))
+    star.scanned.indicator.anchor.set(0.5)
 
-    // TODO: Add scanned graphics to star
     console.log('Energy: ' + app.globals.energy + '%')
     console.log('Distance: ' + Math.round(star.scanned.distance * 10) / 10 + 'LY')
     console.log('Planets: ' + star.scanned.planets)
+
+    app.globals.starsUnderPointer--
+    if (app.globals.starsUnderPointer <= 0) app.stage.scanPrompt.visible = false
 
     if (app.globals.energy <= 0) {
       app.stage.bg.filters = [new PIXI.filters.BlurFilter(4, 2, 2)]

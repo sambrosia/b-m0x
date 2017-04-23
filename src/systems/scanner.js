@@ -11,17 +11,26 @@ const scanner = {
 
     app.event.emit('changeEnergy', -app.globals.scanCost)
     star.attach(new Scanned())
-    star.animatedSprite.interactive = false
 
     if (star === app.globals.sol) star.scanned.planets = 8
 
     if (star.scanned.planets === 8) {
-      // FIXME: Sol candidate indicator, new interaction listeners
-      console.log('Found sol candidate!')
+      star.scanned.indicator = star.animatedSprite.addChild(new PIXI.Sprite(app.res.candidateIndicator.texture))
+
+      star.animatedSprite.on('pointerover', event => {
+        app.stage.scanPrompt.texture = app.res.sendMessage.texture
+      })
+
+      star.animatedSprite.removeAllListeners('pointertap')
+      star.animatedSprite.on('pointertap', event => {
+        // FIXME: Send message and show game over screen w/ response/time waited
+        console.log('send message');
+      })
     } else {
       star.scanned.indicator = star.animatedSprite.addChild(new PIXI.Sprite(app.res.scannedIndicator.texture))
-      star.scanned.indicator.anchor.set(0.5)
+      star.animatedSprite.interactive = false
     }
+    star.scanned.indicator.anchor.set(0.5)
 
     if (app.globals.knownStars.includes(star)) {
       const startPoint = star.transform.position

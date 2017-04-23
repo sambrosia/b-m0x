@@ -8,7 +8,7 @@ export default function generateStars (app) {
   for (let i = 0; i < app.renderer.width * 0.15; i++) {
     let n = 1
     const r = Math.random()
-    if (r < 0.9) n = Math.ceil(Math.random() * 2) + 1
+    if (r < 0.95) n = Math.ceil(Math.random() * 2) + 1
     else n = Math.ceil(Math.random() * 4)
 
     const starTextures = [app.res['star' + n].texture]
@@ -42,6 +42,7 @@ export default function generateStars (app) {
     star.animatedSprite.on('pointerover', event => {
       app.globals.starsUnderPointer++
       app.stage.scanPrompt.visible = true
+      app.stage.scanPrompt.texture = app.res.scanPrompt.texture
       app.stage.scanPrompt.position.set(star.transform.x, star.transform.y)
     })
 
@@ -57,7 +58,7 @@ export default function generateStars (app) {
   const knownStarIndices = []
   for (let i = 0; i < 30; i++) {
     let starIndex = 0
-    while (knownStarIndices.includes(starIndex)) {
+    while (knownStarIndices.includes(starIndex) || starIndex === solIndex) {
       starIndex = Math.round(Math.random() * (stars.length - 1))
     }
     knownStarIndices[i] = starIndex

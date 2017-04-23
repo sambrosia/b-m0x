@@ -38,12 +38,14 @@ export default function mainScene (app) {
   panel.bobber.position.set(-30, 4)
   panel.bobber.strength.set(0, 4)
   panel.bobber.speed.set(1, 600)
+  panel.sprite.alpha = 0.75
 
   const energyText = new fae.Entity(app, new c.Transform(), new PIXI.Sprite(app.res.energy.texture), new Bobber())
   app.stage.fg.addChild(energyText.sprite)
   energyText.bobber.position.set(80, 940)
   energyText.bobber.strength.set(0, 4)
   energyText.bobber.speed.set(1, 600)
+  energyText.sprite.alpha = 0.75
 
   energyText.counter = energyText.sprite.addChild(new PIXI.extras.BitmapText('100%', { font: '40px bmoxFont' }))
   energyText.counter.position.set(210, 12)
@@ -52,6 +54,7 @@ export default function mainScene (app) {
   const bmox = new fae.Entity(app, new c.Transform(), new PIXI.Container(), new Bobber())
   app.stage.fg.addChild(bmox.container)
   app.globals.bmox = bmox
+  bmox.container.alpha = 0.75
 
   bmox.transform.position.set(1400, 0)
   bmox.bobber.position = new fae.utils.Vec2(bmox.transform.position)

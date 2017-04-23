@@ -65,6 +65,10 @@ export default function mainScene (app) {
   scanPrompt.visible = false
   app.stage.scanPrompt = app.stage.fg.addChild(scanPrompt)
 
+  const scannerGraph = app.stage.bg.addChild(new PIXI.Graphics())
+  app.globals.scannerGraph = scannerGraph
+  scannerGraph.lineStyle(4, 0x83ffe0, 0.3)
+
   const starInfo = new PIXI.Sprite(app.res.starInfo.texture)
   panel.sprite.addChild(starInfo)
   starInfo.position.set(80, 40)

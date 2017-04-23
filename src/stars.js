@@ -3,6 +3,8 @@ import * as fae from 'fae'
 const c = fae.components
 
 export default function generateStars (app) {
+  const stars = []
+
   for (let i = 0; i < app.renderer.width * 0.15; i++) {
     let n = 1
     const r = Math.random()
@@ -15,6 +17,7 @@ export default function generateStars (app) {
     const star = new fae.Entity(app, new c.Transform(), new PIXI.extras.AnimatedSprite(starTextures))
     app.stage.bg.addChild(star.animatedSprite)
     star.group('star')
+    stars.push(star)
 
     star.transform.position.x = Math.random() * app.renderer.width
     star.transform.position.y = Math.random() * app.renderer.height
@@ -46,5 +49,22 @@ export default function generateStars (app) {
       app.globals.starsUnderPointer--
       if (app.globals.starsUnderPointer <= 0) app.stage.scanPrompt.visible = false
     })
+  }
+
+  const solIndex = Math.round(Math.random() * (stars.length - 1))
+  app.globals.sol = stars[solIndex]
+
+  const knownStarIndices = []
+  for (let i = 0; i < 30; i++) {
+    let starIndex = 0
+    while (knownStarIndices.includes(starIndex)) {
+      starIndex = Math.round(Math.random() * (stars.length - 1))
+    }
+    knownStarIndices[i] = starIndex
+  }
+
+  app.globals.knownStars = []
+  for (const i of knownStarIndices) {
+    app.globals.knownStars.push(stars[i])
   }
 }

@@ -28,6 +28,8 @@ app.loader
 .add('bg', 'assets/bg.png')
 .add('panel', 'assets/panel.png')
 .add('panel-glow', 'assets/panel-glow.png')
+.add('noPower', 'assets/noPower.png')
+.add('replay', 'assets/replay.png')
 .add('energy', 'assets/energy.png')
 .add('bmoxFont', 'assets/bmoxFont.xml')
 
@@ -35,6 +37,7 @@ app.loader
 .add('bmoxRing', 'assets/bmoxRing.png')
 .add('bmoxHappy', 'assets/bmoxHappy.png')
 .add('bmoxAngry', 'assets/bmoxAngry.png')
+.add('bmoxSad', 'assets/bmoxSad.png')
 
 .add('star1', 'assets/star1.png')
 .add('star2', 'assets/star2.png')

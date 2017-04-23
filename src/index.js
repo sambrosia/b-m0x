@@ -29,6 +29,7 @@ app.loader
 .add('panel', 'assets/panel.png')
 .add('panel-glow', 'assets/panel-glow.png')
 .add('energy', 'assets/energy.png')
+.add('bmoxFont', 'assets/bmoxFont.xml')
 
 .add('bmoxGlow', 'assets/bmoxGlow.png')
 .add('bmoxRing', 'assets/bmoxRing.png')
@@ -88,7 +89,7 @@ const Scanner = {
     if (star.scanned) return
     if (app.globals.energy < app.globals.scanCost) return // FIXME rejection feedback/game over
 
-    app.globals.energy -= app.globals.scanCost
+    app.event.emit('changeEnergy', -app.globals.scanCost)
     star.attach(new Scanned())
     star.animatedSprite.interactive = false
 
@@ -99,7 +100,12 @@ const Scanner = {
   }
 }
 
-const Energy = {}
+const Energy = {
+  changeEnergy (n) {
+    app.globals.energy += n
+    app.globals.energyCounter.text = app.globals.energy + '%'
+  }
+}
 
 const Bobbing = {
   update (dt) {
@@ -175,6 +181,10 @@ function mainScene (app) {
   energyText.bobber.position.set(20, 840)
   energyText.bobber.strength.set(0, 4)
   energyText.bobber.speed.set(1, 600)
+
+  energyText.counter = energyText.sprite.addChild(new PIXI.extras.BitmapText('100%', { font: '40px bmoxFont' }))
+  energyText.counter.position.set(480, 54)
+  app.globals.energyCounter = energyText.counter
 
   const bmox = new fae.Entity(app, new c.Transform(), new PIXI.Container(), new Bobber())
   app.stage.fg.addChild(bmox.container)

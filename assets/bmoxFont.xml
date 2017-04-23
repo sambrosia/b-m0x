@@ -1,0 +1,22 @@
+<font>
+  <info face="bmoxFont" size="40"/>
+  <common lineHeight="48" scaleW="512" scaleH="48" pages="1" />
+  <pages>
+    <page id="0" file="font.png" />
+  </pages>
+  <chars count="11">
+    <char id="37" x="400" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- % -->
+    <char id="48" x="0" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- 0 -->
+    <char id="49" x="40" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="32" /><!-- 1 -->
+    <char id="50" x="80" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- 2 -->
+    <char id="51" x="120" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- 3 -->
+    <char id="52" x="160" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- 4 -->
+    <char id="53" x="200" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- 5 -->
+    <char id="54" x="240" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- 6 -->
+    <char id="55" x="280" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- 7 -->
+    <char id="56" x="320" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- 8 -->
+    <char id="57" x="360" y="0" width="40" height="48" xoffset="0" yoffset="0" xadvance="40" /><!-- 9 -->
+  </chars>
+  <kernings count="0">
+	</kernings>
+</font>

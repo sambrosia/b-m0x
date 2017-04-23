@@ -11,9 +11,9 @@ const c = fae.components
 
 export default function mainScene (app) {
   app.globals = {
-    date: 2117,
+    starsUnderPointer: 0,
     energy: 100,
-    scanCost: 50
+    scanCost: 10
   }
 
   new fae.System(fae.systems.PIXIAdapter).start(app)
@@ -57,4 +57,9 @@ export default function mainScene (app) {
   bmox.ring = bmox.container.addChild(new PIXI.Sprite(app.res.bmoxRing.texture))
   bmox.face = bmox.container.addChild(new PIXI.Sprite(app.res.bmoxHappy.texture))
   app.event.emit('bmoxEmote', 'Happy')
+
+  const scanPrompt = new PIXI.Sprite(app.res.scanPrompt.texture)
+  scanPrompt.anchor.set(0.5)
+  scanPrompt.visible = false
+  app.stage.scanPrompt = app.stage.fg.addChild(scanPrompt)
 }

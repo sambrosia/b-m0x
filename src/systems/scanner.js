@@ -18,9 +18,9 @@ const scanner = {
     console.log('Planets: ' + star.scanned.planets)
 
     if (app.globals.energy <= 0) {
-      // TODO: Game over
       app.stage.bg.filters = [new PIXI.filters.BlurFilter(4, 2, 2)]
       app.stage.bg.interactiveChildren = false
+      app.stage.scanPrompt.visible = false
       app.event.emit('bmoxEmote', 'Sad')
 
       const noPower = app.stage.fg.addChild(new PIXI.Sprite(app.res.noPower.texture))

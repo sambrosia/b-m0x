@@ -29,6 +29,8 @@ app.loader
 .add('panel', 'assets/panel.png')
 .add('panel-glow', 'assets/panel-glow.png')
 .add('noPower', 'assets/noPower.png')
+.add('noResponse', 'assets/noResponse.png')
+.add('responseMessage', 'assets/responseMessage.png')
 .add('starInfo', 'assets/starInfo.png')
 .add('sendMessage', 'assets/sendMessage.png')
 .add('scanPrompt', 'assets/scanPrompt.png')

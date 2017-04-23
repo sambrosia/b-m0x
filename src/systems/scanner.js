@@ -23,8 +23,7 @@ const scanner = {
 
       star.animatedSprite.removeAllListeners('pointertap')
       star.animatedSprite.on('pointertap', event => {
-        // FIXME: Send message and show game over screen w/ response/time waited
-        console.log('send message');
+        app.event.emit('sendMessage', star)
       })
     } else {
       star.scanned.indicator = star.animatedSprite.addChild(new PIXI.Sprite(app.res.scannedIndicator.texture))
@@ -52,30 +51,56 @@ const scanner = {
 
     app.globals.starsUnderPointer--
     if (app.globals.starsUnderPointer <= 0) app.stage.scanPrompt.visible = false
-
-    if (app.globals.energy <= 0) {
-      app.stage.bg.filters = [new PIXI.filters.BlurFilter(4, 2, 2)]
-      app.stage.bg.interactiveChildren = false
-      app.stage.scanPrompt.visible = false
-      app.event.emit('bmoxEmote', 'Sad')
-
-      const noPower = app.stage.fg.addChild(new PIXI.Sprite(app.res.noPower.texture))
-      noPower.anchor.set(0.5)
-      noPower.position.set(app.renderer.width / 2, 400)
-
-      const replay = app.stage.fg.addChild(new PIXI.Sprite(app.res.replay.texture))
-      replay.anchor.set(0.5)
-      replay.position.set(app.renderer.width / 2, 700)
-      replay.interactive = true
-      replay.buttonMode = true
-      replay.on('pointertap', event => {
-        app.enter(mainScene)
-      })
-    }
   },
 
   sendMessage (star) {
+    const responseTime = star.scanned.distance * 2
+    const powerTimeLeft = app.globals.energy * (500 + Math.random() * 10)
+    if (star !== app.globals.sol || powerTimeLeft < responseTime) {
+      app.event.emit('noResponse', Math.round(powerTimeLeft))
+    } else {
+      app.event.emit('response', Math.round(responseTime))
+    }
+  },
 
+  noResponse (timeWaited) {
+    app.stage.bg.filters = [new PIXI.filters.BlurFilter(4, 2, 2)]
+    app.stage.bg.interactiveChildren = false
+    app.stage.scanPrompt.visible = false
+    app.event.emit('bmoxEmote', 'Sad')
+    app.globals.energyCounter.text = '0%'
+
+    const noResponse = app.stage.fg.addChild(new PIXI.Sprite(app.res.noResponse.texture))
+    noResponse.anchor.set(0.5)
+    noResponse.position.set(app.renderer.width / 2, 400)
+
+    const yearsText = app.stage.fg.addChild(new PIXI.extras.BitmapText(timeWaited.toString(), { font: '40px bmoxFont' }))
+    yearsText.anchor.set(0.5)
+    yearsText.position.set(app.renderer.width / 2 - 12, 360)
+
+    const replay = app.stage.fg.addChild(new PIXI.Sprite(app.res.replay.texture))
+    replay.anchor.set(0.5)
+    replay.position.set(app.renderer.width / 2, 760)
+    replay.interactive = true
+    replay.buttonMode = true
+    replay.on('pointertap', event => {
+      app.enter(mainScene)
+    })
+  },
+
+  response (timeWaited) {
+    app.stage.bg.filters = [new PIXI.filters.BlurFilter(4, 2, 2)]
+    app.stage.bg.interactiveChildren = false
+    app.stage.scanPrompt.visible = false
+    app.event.emit('bmoxEmote', 'Happy')
+
+    const response = app.stage.fg.addChild(new PIXI.Sprite(app.res.responseMessage.texture))
+    response.anchor.set(0.5)
+    response.position.set(app.renderer.width / 2, 400)
+
+    const yearsText = app.stage.fg.addChild(new PIXI.extras.BitmapText(timeWaited.toString(), { font: '40px bmoxFont' }))
+    yearsText.anchor.set(0.5)
+    yearsText.position.set(app.renderer.width / 2 - 12, 260)
   }
 }
 

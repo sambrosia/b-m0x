@@ -32,6 +32,8 @@ export default function mainScene (app) {
 
   generateStars(app)
 
+  app.res.soundOn.sound.play()
+
   const panel = new fae.Entity(app, new c.Transform(), new PIXI.Sprite(app.res.panel.texture), new Bobber())
   app.stage.fg.addChild(panel.sprite)
   panel.glow = panel.sprite.addChild(new PIXI.Sprite(app.res['panel-glow'].texture))

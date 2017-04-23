@@ -1,3 +1,4 @@
+/* global PIXI */
 import * as fae from 'fae'
 import mainScene from './main'
 
@@ -56,6 +57,16 @@ app.loader
 .add('glow3', 'assets/glow3.png')
 .add('glow4', 'assets/glow4.png')
 
+.add('soundScanned', 'assets/scanned.wav')
+.add('soundCandidate', 'assets/candidate.wav')
+.add('soundKnown', 'assets/known.wav')
+.add('soundReceived', 'assets/received.wav')
+.add('soundOn', 'assets/on.wav')
+.add('soundOff', 'assets/off.wav')
+
 .load((loader, resources) => {
+  PIXI.sound.volumeAll = 0.15
+  resources.soundScanned.sound.volume = 0.6
+  resources.soundReceived.sound.volume = 6
   app.enter(mainScene)
 })

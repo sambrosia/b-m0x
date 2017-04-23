@@ -15,6 +15,7 @@ const energy = {
       app.stage.bg.interactiveChildren = false
       app.stage.scanPrompt.visible = false
       app.event.emit('bmoxEmote', 'Sad')
+      app.res.soundOff.sound.play()
 
       const noPower = app.stage.fg.addChild(new PIXI.Sprite(app.res.noPower.texture))
       noPower.anchor.set(0.5)

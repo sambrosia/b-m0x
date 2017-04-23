@@ -11,10 +11,12 @@ const scanner = {
 
     app.event.emit('changeEnergy', -app.globals.scanCost)
     star.attach(new Scanned())
+    app.res.soundScanned.sound.play({ speed: 1 + (Math.random() * 0.25) })
 
     if (star === app.globals.sol) star.scanned.planets = 8
 
     if (star.scanned.planets === 8) {
+      app.res.soundCandidate.sound.play({ speed: 1 + (Math.random() * 0.25) })
       star.scanned.indicator = star.animatedSprite.addChild(new PIXI.Sprite(app.res.candidateIndicator.texture))
 
       star.animatedSprite.on('pointerover', event => {
@@ -32,6 +34,7 @@ const scanner = {
     star.scanned.indicator.anchor.set(0.5)
 
     if (app.globals.knownStars.includes(star)) {
+      app.res.soundKnown.sound.play({ speed: 1 + (Math.random() * 0.25) })
       const startPoint = star.transform.position
       const offset = app.globals.sol.transform.position.minus(startPoint)
       offset.add(new fae.utils.Vec2((Math.random() - 0.5) * 50, (Math.random() - 0.5) * 50))
@@ -69,6 +72,7 @@ const scanner = {
     app.stage.scanPrompt.visible = false
     app.event.emit('bmoxEmote', 'Sad')
     app.globals.energyCounter.text = '0%'
+    app.res.soundOff.sound.play()
 
     const noResponse = app.stage.fg.addChild(new PIXI.Sprite(app.res.noResponse.texture))
     noResponse.anchor.set(0.5)
@@ -93,6 +97,7 @@ const scanner = {
     app.stage.bg.interactiveChildren = false
     app.stage.scanPrompt.visible = false
     app.event.emit('bmoxEmote', 'Happy')
+    app.res.soundReceived.sound.play()
 
     const response = app.stage.fg.addChild(new PIXI.Sprite(app.res.responseMessage.texture))
     response.anchor.set(0.5)
